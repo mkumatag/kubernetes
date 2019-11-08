@@ -23,7 +23,6 @@ import (
 	"time"
 
 	v1 "k8s.io/api/core/v1"
-	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/uuid"
 	"k8s.io/apimachinery/pkg/watch"
@@ -149,12 +148,6 @@ var _ = framework.KubeDescribe("InitContainer [NodeConformance]", func() {
 					{
 						Name:  "run1",
 						Image: imageutils.GetPauseImageName(),
-						Resources: v1.ResourceRequirements{
-							Limits: v1.ResourceList{
-								v1.ResourceCPU:    *resource.NewMilliQuantity(100, resource.DecimalSI),
-								v1.ResourceMemory: *resource.NewQuantity(50*1024*1024, resource.DecimalSI),
-							},
-						},
 					},
 				},
 			},
@@ -221,12 +214,6 @@ var _ = framework.KubeDescribe("InitContainer [NodeConformance]", func() {
 					{
 						Name:  "run1",
 						Image: imageutils.GetPauseImageName(),
-						Resources: v1.ResourceRequirements{
-							Limits: v1.ResourceList{
-								v1.ResourceCPU:    *resource.NewMilliQuantity(100, resource.DecimalSI),
-								v1.ResourceMemory: *resource.NewQuantity(50*1024*1024, resource.DecimalSI),
-							},
-						},
 					},
 				},
 			},
@@ -338,12 +325,6 @@ var _ = framework.KubeDescribe("InitContainer [NodeConformance]", func() {
 						Name:    "run1",
 						Image:   imageutils.GetE2EImage(imageutils.BusyBox),
 						Command: []string{"/bin/true"},
-						Resources: v1.ResourceRequirements{
-							Limits: v1.ResourceList{
-								v1.ResourceCPU:    *resource.NewMilliQuantity(100, resource.DecimalSI),
-								v1.ResourceMemory: *resource.NewQuantity(50*1024*1024, resource.DecimalSI),
-							},
-						},
 					},
 				},
 			},
