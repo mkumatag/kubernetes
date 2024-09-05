@@ -89,9 +89,9 @@ var _ = SIGDescribe("SystemNodeCriticalPod", framework.WithSlow(), framework.Wit
 					if hasNodeCondition(ctx, f, v1.NodeDiskPressure) {
 						return nil
 					}
-					msg := fmt.Sprintf("NodeCondition: %s not encountered yet", v1.NodeDiskPressure)
-					framework.Logf(msg)
-					return fmt.Errorf(msg)
+					msgf := "NodeCondition: %s not encountered yet"
+					framework.Logf(msgf, v1.NodeDiskPressure)
+					return fmt.Errorf(msgf, v1.NodeDiskPressure)
 				}, time.Minute*2, time.Second*4).Should(gomega.Succeed())
 
 				ginkgo.By("check if it's running all the time")
@@ -100,7 +100,7 @@ var _ = SIGDescribe("SystemNodeCriticalPod", framework.WithSlow(), framework.Wit
 					if err == nil {
 						framework.Logf("mirror pod %q is running", mirrorPodName)
 					} else {
-						framework.Logf(err.Error())
+						framework.Logf("%s", err.Error())
 					}
 					return err
 				}, time.Minute*8, time.Second*4).ShouldNot(gomega.HaveOccurred())
